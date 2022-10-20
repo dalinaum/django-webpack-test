@@ -3,20 +3,19 @@ const Webpack = require('webpack');
 const { merge } = require('webpack-merge');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const StylelintPlugin = require('stylelint-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const common = require('./webpack.common.js');
+const { truncate } = require('fs');
 
 module.exports = merge(common, {
-  target: 'web',
   mode: 'development',
   devtool: 'eval-cheap-source-map',
   output: {
     chunkFilename: 'js/[name].chunk.js',
   },
   devServer: {
-    client: {
-      logging: 'error',
-    },
+    inline: true,
     hot: true,
   },
   plugins: [
@@ -31,6 +30,9 @@ module.exports = merge(common, {
     new StylelintPlugin({
       files: Path.join('src', '**/*.s?(a|c)ss'),
     }),
+    new MiniCssExtractPlugin({
+      filename: 'css/app.css',
+    })
   ],
   module: {
     rules: [
@@ -42,7 +44,7 @@ module.exports = merge(common, {
       {
         test: /\.s?css$/i,
         use: [
-          'style-loader',
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {

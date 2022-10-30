@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'webpack_loader',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -123,7 +125,17 @@ STATICFILES_DIRS = [
     str(BASE_DIR / 'frontend' / 'build'),
 ]
 
+STATIC_ROOT = str(BASE_DIR / 'staticfiles')
+
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+WEBPACK_LOADER = {
+     'DEFAULT': {
+        'STATS_FILE': str(BASE_DIR / 'frontend' / 'webpack-stats.json'),
+    },
+}

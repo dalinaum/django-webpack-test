@@ -1,0 +1,24 @@
+{% extends 'frontend-base.html' %}
+
+{% block html %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  {% block css %}
+    {{ block.super }}
+    {# we can add more css here #}
+  {% endblock %}
+
+</head>
+<body>
+{% block content %}{% endblock %}
+
+{% block js %}
+  {{ block.super }}
+  {# we can add more js here #}
+{% endblock %}
+
+</body>
+</html>
+{% endblock %}

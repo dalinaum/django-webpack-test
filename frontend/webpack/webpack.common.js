@@ -25,7 +25,9 @@ module.exports = {
       patterns: [{ from: Path.resolve(__dirname, '../public'), to: 'public' }],
     }),
     new HtmlWebpackPlugin({
-      template: Path.resolve(__dirname, '../src/index.html'),
+      template: Path.resolve(__dirname, '../src/index.ejs'),
+      filename: Path.resolve(__dirname, '../../django_webpack_app/templates/frontend-base.html'),
+      inject: false,
     }),
     new BundleTracker({
       filename: './webpack-stats.json',
